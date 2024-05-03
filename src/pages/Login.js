@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       await axios.post('/ry',
         { email, password }
@@ -23,7 +23,7 @@ const Login = () => {
       console.log(error);
       toast.error('Login Failed');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
