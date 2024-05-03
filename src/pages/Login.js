@@ -3,8 +3,9 @@ import cover from '../components/Images/login-cover.svg';
 import axios from '../api/api';
 import { Toaster, toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+const Login = ({ setAccessToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,9 +15,10 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/ry',
+      const token = await axios.post('/login',
         { email, password }
       );
+      setAccessToken(token);
       toast.success('Login Sucessful');
       navigate('/');
     } catch (error) {
@@ -75,3 +77,7 @@ const Login = () => {
 };
 
 export default Login;
+
+Login.propTypes = {
+  setAccessToken: PropTypes.func
+};
