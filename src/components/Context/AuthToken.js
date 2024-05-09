@@ -39,8 +39,8 @@ export default function AuthToken () {
       if (!token) {
         clearInterval(checkTokenInterval); // Stop checking once token is expired
         swal('Session has expired!', 'Please log in again.', 'info');
-        window.location.href = '/';
-        window.location.reload();
+        // window.location.href = '/';
+        // window.location.reload();
       }
     }, 1 * 60 * 60 * 1000); // Check every 1 hour
 
