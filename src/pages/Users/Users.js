@@ -18,8 +18,9 @@ const Users = () => {
   const getUsers = useCallback(async () => {
     try {
       const offset = (currentPage - 1) * recordsPerPage;
-      const response = await axios.get(`/entity`);
-      setUsers(response.data.Data);
+      const response = await axios.get(`/users?offset=${offset}&limit=${recordsPerPage}`);
+      setUsers(response.data);
+      console.log(response.data);
       setTotal(response.data.Total);
       setLoading(false);
     } catch (error) {
@@ -77,35 +78,27 @@ const Users = () => {
                     <table className='w-full text-left table-auto'>
                       <thead>
                         <tr className='border-b border-slate-500'>
+                          <th className='p-2'>ID</th>
                           <th className='p-2'>First Name</th>
-                          <th className='p-2'>Other Names</th>
+                          <th className='p-2'>Last Names</th>
                           <th className='p-2'>Email</th>
                           <th className='p-2'>Phone Number</th>
-                          <th className='p-2'>ID Number</th>
                           <th className='p-2'>Role</th>
-                          <th className='p-2'>Status</th>
                           <th className='p-2'>Created At</th>
-                          <th className='p-2'>Last Login</th>
+                          <th className='p-2'>Updated At</th>
                         </tr>
                       </thead>
                       <tbody>
                         {users.map((user) => (
                           <tr key={user.id}>
-                            <td className='p-2 '>{user.first_name}</td>
-                            <td className='p-2'>{user.other_names}</td>
+                            <td className='p-2 '>{user.id}</td>
+                            <td className='p-2 '>{user.firstName}</td>
+                            <td className='p-2'>{user.lastName}</td>
                             <td className='p-2'>{user.email}</td>
-                            <td className='p-2'>{user.msisdn}</td>
-                            <td className='p-2'>{user.id_number}</td>
+                            <td className='p-2'>{user.phoneNumber}</td>
                             <td className='p-2'>{user.role}</td>
-                            <td className='p-2'>
-                              {user.active_status === 'active'  ? 
-                                <span className='bg-green-100 text-green-600 font-bold px-5 py-1 rounded-full'>Active</span> 
-                                : 
-                                <span className='bg-red-100 text-red-600 font-bold px-5 py-1 rounded-full'>Inactive</span>
-                              }
-                            </td>
-                            <td className='p-2'>{new Date(user.start_date).toISOString().replace('T', ' ').slice(0, 19)}</td>
-                            <td className='p-2'>{new Date(user.login_last_date).toISOString().replace('T', ' ').slice(0, 19)}</td>
+                            <td className='p-2'>{new Date(user.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
+                            <td className='p-2'>{new Date(user.updatedAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
                           </tr>
                         ))}
                       </tbody>

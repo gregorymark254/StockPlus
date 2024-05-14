@@ -32,6 +32,10 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  // getting current user
+  const currentUser = window.localStorage.getItem('token');
+  const user = JSON.parse(currentUser).data.firstName;
+
   return (
     <div className='flex justify-between items-center p-1 bg-white shadow-md'>
       <div className='text-xl rounded-full p-3 hover:bg-light-gray'>
@@ -42,7 +46,7 @@ const Navbar = () => {
           <img className='rounded-full w-8 h-8' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaS_K13w6lMdb6kZEGj2wZ3jnIwap2YTpganfCLWXUr_L-7xvEiTEKFC2iNgRO1XJ184A&usqp=CAU' alt='user-profile' />
           <div className='dropdown'>
             <a className='dropdown-toggle px-4 py-2 bg-slate-100 text-black font-medium shadow-md transition duration-150 ease-in-out flex items-center whitespace-nowrap ' href='/#' type='button' id='dropdownMenuButton2' data-bs-toggle='dropdown' aria-expanded='false'>
-              Gregory Mark
+              {user}
               <span className='w-4 h-4 ml-auto text-xl'><MdOutlineKeyboardArrowDown /></span>
             </a>
             <ul className='dropdown-menu w-36 absolute  bg-white text-base z-50 float-left  py-2 list-nonetext-left  rounded-lg  shadow-lg  mt-1 hidden m-0 bg-clip-padding border-none' aria-labelledby='dropdownMenuButton2'>
