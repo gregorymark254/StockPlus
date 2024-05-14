@@ -28,3 +28,17 @@ body {
   color: #202442;
   background-color: #eeeeee;
 }
+
+th {
+  background-color: #f2f9ff;
+  color: #6571ff;
+}
+th,
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+tr:nth-child(even) {
+  background-color: #f1f4f6;
+}

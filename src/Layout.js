@@ -13,14 +13,14 @@ import Missing from './pages/Missing';
 import Home from './pages/Home';
 import Users from './pages/Users/Users'
 import AddUser from './pages/Users/AddUser'
-import Customers from './pages/Customers/Customers'
-import AddCustomer from './pages/Customers/AddCustomer'
 import Products from './pages/Products/Products'
 import CreateProduct from './pages/Products/CreateProduct';
 import SupplyItems from './pages/Products/SupplyItems'
 import AddSupplyItem from './pages/Products/AddSupplyItem'
 import Loans from './pages/Loans/Loans'
 import LoanRequests from './pages/Loans/LoanRequests'
+import RequestLoan from './pages/Loans/RequestLoan'
+import Transactions from './pages/Loans/Transactions'
 import Accounts from './pages/Account/Accounts'
 import AddAccount from './pages/Account/AddAccount'
 import Report from './pages/Reports/Reports'
@@ -28,9 +28,9 @@ import Report from './pages/Reports/Reports'
 const Layout = () => {
   const { activeMenu } = useStateContext();
   const { accessToken, setAccessToken } = AuthToken();
-  if (!accessToken) {
-    return <Login setAccessToken={setAccessToken} />;
-  }
+  // if (!accessToken) {
+  //   return <Login setAccessToken={setAccessToken} />;
+  // }
 
   return (
     <main>
@@ -62,14 +62,14 @@ const Layout = () => {
               <Route path='/dashboard' element={<Home />} />
               <Route path='/users' element={<Users />} />
               <Route path='/adduser' element={<AddUser />} />
-              <Route path='/customers' element={<Customers />} />
-              <Route path='/addcustomer' element={<AddCustomer />} />
               <Route path='/products' element={<Products />} />
               <Route path='/addproduct' element={<CreateProduct />} />
               <Route path='/supply-items' element={<SupplyItems />} />
               <Route path='/addsupplyitem' element={<AddSupplyItem />} />
               <Route path='/loans' element={<Loans />} />
               <Route path='/loan-requests' element={<LoanRequests />} />
+              <Route path='/request-loan' element={<RequestLoan />} />
+              <Route path='/transactions' element={<Transactions />} />
               <Route path='/accounts' element={<Accounts />} />
               <Route path='/addaccount' element={<AddAccount />} />
               <Route path='/reports' element={<Report />} />

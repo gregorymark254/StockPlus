@@ -6,8 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [first_name, setFirst_name] = useState('');
+  const [other_names, setOther_names] = useState('');
+  const [id_number, setId_number] = useState('');
+  const [msisdn, setMsisdn] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -15,9 +17,10 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/login',
-        { email, password }
+      const response = await axios.post('/user',
+        { first_name, other_names ,id_number, msisdn }
       );
+      console.log(response)
       toast.success('Registration Sucessful');
       navigate('/login');
     } catch (error) {
@@ -39,29 +42,53 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className='text-center p-4'>
               <h3><b>Mini <span className='text-[#6571ff]'>Loan</span></b></h3>
-              <span className='text-lg font-light'>Please Register to your account.</span>
+              <span className='text-lg font-light'>Please register to create an account.</span>
             </div>
             <div className='my-4'>
-              <label htmlFor='Email'><span>Email Address</span>
+              <label htmlFor='firstname'><span>First Name</span>
                 <input
-                  type='email'
+                  type='text'
                   required
-                  placeholder='user@example.com'
+                  placeholder='First Name'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={first_name}
+                  onChange={(e) => setFirst_name(e.target.value)}
                 />
               </label>
             </div>
             <div className='my-4'>
-              <label htmlFor='Password'><span>Password</span>
+              <label htmlFor='firstname'><span>Other Name</span>
                 <input
-                  type='password'
+                  type='text'
                   required
-                  placeholder='Password'
+                  placeholder='Other Name'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={other_names}
+                  onChange={(e) => setOther_names(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className='my-4'>
+              <label htmlFor='id'><span>ID Number</span>
+                <input
+                  type='number'
+                  required
+                  placeholder='ID Number'
+                  className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
+                  value={id_number}
+                  onChange={(e) => setId_number(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className='my-4'>
+              <label htmlFor='number'><span>Phone Number</span>
+                <input
+                  type='number'
+                  required
+                  placeholder='Phone Number'
+                  className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
+                  value={msisdn}
+                  onChange={(e) => setMsisdn(e.target.value)}
                 />
               </label>
             </div>

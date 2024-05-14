@@ -40,14 +40,14 @@ const Login = ({ setAccessToken }) => {
           <form onSubmit={handleSubmit}>
             <div className='text-center p-3'>
               <h3><b>Mini <span className='text-[#6571ff]'>Loan</span></b></h3>
-              <span className='text-lg font-light'>Please Login to your account.</span>
+              <span className='text-lg font-light'>Please login to your account.</span>
             </div>
             <div className='my-3'>
               <label htmlFor='username'><span>ID Number</span>
                 <input
                   type='text'
                   required
-                  placeholder='idnumber'
+                  placeholder='ID Number'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -55,11 +55,11 @@ const Login = ({ setAccessToken }) => {
               </label>
             </div>
             <div className='my-3'>
-              <label htmlFor='Password'><span>Password</span>
+              <label htmlFor='pin'><span>Pin</span>
                 <input
                   type='password'
                   required
-                  placeholder='Password'
+                  placeholder='****'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
