@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../../api/api';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
@@ -17,10 +17,9 @@ const AddUser = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/user',
+      await axios.post('/register',
         {  firstName, lastName, email, phoneNumber, password, role }
       )
-      console.log(response)
       toast.success('User added sucessfully')
       navigate('/app/users')
     } catch (error) {

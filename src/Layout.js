@@ -13,6 +13,7 @@ import Missing from './pages/Missing';
 import Home from './pages/Home';
 import Users from './pages/Users/Users'
 import AddUser from './pages/Users/AddUser'
+import UpdateUser from './pages/Users/UpdateUser'
 
 const Layout = () => {
   const { activeMenu } = useStateContext();
@@ -51,6 +52,7 @@ const Layout = () => {
               <Route path='/dashboard' element={<Home />} />
               <Route path='/users' element={<Users />} />
               <Route path='/adduser' element={<AddUser />} />
+              <Route path='/updateuser/:id' element={<UpdateUser />} />
               <Route path='/unauthorised' element={<Unauthorised />} />
               <Route path='*' element={<Missing />} />
             </Routes>

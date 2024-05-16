@@ -22,10 +22,9 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.post('/register',
+      await axios.post('/register',
         { firstName, lastName, email, phoneNumber, password }
       );
-      console.log(response)
       toast.success('Registration Sucessful');
       navigate('/login');
     } catch (error) {
