@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/forgot_password',
+      await axios.post('/api/forgot_password',
         { msisdn }
       );
       toast.info('Reset code sent! Check phone.');

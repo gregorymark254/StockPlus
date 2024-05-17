@@ -20,7 +20,7 @@ const Users = () => {
   // Fetch All users
   const getUsers = useCallback(async (offset, limit, search) => {
     try {
-      const response = await axios.get(`/users?offset=${offset}&limit=${recordsPerPage}&search=${search}`);
+      const response = await axios.get(`/api/users?offset=${offset}&limit=${limit}&search=${search}`);
       setUsers(response.data.results);
       setTotal(response.data.total);
       setLoading(false);
@@ -29,7 +29,7 @@ const Users = () => {
       setError(error);
       setLoading(false);
     }
-  },[recordsPerPage]);
+  },[]);
 
   // Search user
   const handleSearchChange = (e) => {
@@ -52,7 +52,7 @@ const Users = () => {
     const confirmed = window.confirm('Are you sure you want to delete this User?');
     if (confirmed) {
       try {
-        await axios.delete(`/deleteuser/${id}`);
+        await axios.delete(`/api/deleteuser/${id}`);
         toast.success('User Deleted');
         getUsers((currentPage - 1) * recordsPerPage, recordsPerPage, searchUser);
       } catch (error) {

@@ -15,7 +15,7 @@ const UpdateUser = () => {
   useEffect(() => {
     const getUserById = async () => {
       try {
-        const response = await axios.get(`/users/${id}`);
+        const response = await axios.get(`/api/users/${id}`);
         setFirstName(response.data.firstName);
         setLastName(response.data.lastName);
         setPhoneNumber(response.data.phoneNumber);
@@ -30,7 +30,7 @@ const UpdateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/updateuser/${id}`, 
+      await axios.put(`/api/updateuser/${id}`, 
         { firstName, lastName, phoneNumber, role}
       );
       toast.success('User Updated');

@@ -15,7 +15,7 @@ const Login = ({ setAccessToken }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const token = await axios.post('/login',
+      const token = await axios.post('/api/login',
         { email, password }
       );
       setAccessToken(token);

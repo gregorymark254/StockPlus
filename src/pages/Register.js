@@ -22,7 +22,7 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      await axios.post('/register',
+      await axios.post('/api/register',
         { firstName, lastName, email, phoneNumber, password }
       );
       toast.success('Registration Sucessful');
