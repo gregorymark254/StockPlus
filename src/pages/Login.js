@@ -74,6 +74,10 @@ const Login = ({ setAccessToken }) => {
             <span>Don't have an account? <u className='text-[#6571ff] hover:text-blue-700'><Link to='/register'>Register</Link></u></span>
             <Link to='/forgot-password' className='text-[#6571ff] hover:underline'>Forgot Password?</Link>
           </div>
+          <div className='mt-4'>
+            <span>Admin:  greg@gmail.com</span>
+            <p>password:  qwerty123</p>
+          </div>
         </div>
       </div>
     </main>
