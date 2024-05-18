@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdOutlineCancel, MdSpaceDashboard, MdOutlineKeyboardArrowDown, MdReport } from 'react-icons/md';
-import { FaUsers, FaShoppingCart } from 'react-icons/fa';
+import { MdOutlineCancel, MdSpaceDashboard, MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { FaUsers, FaShoppingCart,FaMoneyCheck,FaUserMinus,FaCartPlus } from 'react-icons/fa';
 import { useStateContext } from '../Context/ContextProvider';
 import 'tw-elements';
 
@@ -43,6 +43,21 @@ const SideBar = () => {
                       </li>
                     </ul>
                   </li>
+                  <li className='relative' id='sidenavXxEx2'>
+                    <span className='flex items-center text-sm py-4 px-6 h-12 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] transition duration-300 ease-in-out cursor-pointer' data-mdb-ripple='true' data-mdb-ripple-color='primary' data-bs-toggle='collapse' data-bs-target='#collapseSidenavXxEx2' aria-expanded='false' aria-controls='collapseSidenavXxEx2'>
+                      <span className='w-4 h-4 mr-3'><FaUserMinus /></span>
+                      <span>Suppliers</span>
+                      <span className='w-4 h-4 ml-auto text-xl'><MdOutlineKeyboardArrowDown /></span>
+                    </span>
+                    <ul className='relative accordion-collapse collapse' id='collapseSidenavXxEx2' aria-labelledby='sidenavXxEx2' data-bs-parent='#sidenavSecExample'>
+                      <li className='relative'>
+                        <Link to='/app/suppliers' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Suppliers</Link>
+                      </li>
+                      <li className='relative'>
+                        <Link to='/app/createsupplier' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Add Supplier</Link>
+                      </li>
+                    </ul>
+                  </li>
                   <li className='relative' id='sidenavXxEx3'>
                     <span className='flex items-center text-sm py-4 px-6 h-12 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] transition duration-300 ease-in-out cursor-pointer' data-mdb-ripple='true' data-mdb-ripple-color='primary' data-bs-toggle='collapse' data-bs-target='#collapseSidenavXxEx3' aria-expanded='false' aria-controls='collapseSidenavXxEx3'>
                       <span className='w-4 h-4 mr-3'><FaShoppingCart /></span>
@@ -54,27 +69,30 @@ const SideBar = () => {
                         <Link to='/app/products' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>All Products</Link>
                       </li>
                       <li className='relative'>
-                        <Link to='/app/addproduct' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Create Product</Link>
-                      </li>
-                      <li className='relative'>
-                        <Link to='/app/supply-items' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Supply Items</Link>
-                      </li>
-                      <li className='relative'>
-                        <Link to='/app/addsupplyitem' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Add Supply Item</Link>
+                        <Link to='/app/createproduct' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Create Product</Link>
                       </li>
                     </ul>
                   </li>
-                  <li className='relative' id='sidenavXxEx6'>
-                    <span className='flex items-center text-sm py-4 px-6 h-12 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] transition duration-300 ease-in-out cursor-pointer' data-mdb-ripple='true' data-mdb-ripple-color='primary' data-bs-toggle='collapse' data-bs-target='#collapseSidenavXxEx6' aria-expanded='false' aria-controls='collapseSidenavXxEx6'>
-                      <span className='w-4 h-4 mr-3'><MdReport /></span>
-                      <span>Reports</span>
+                  <li className='relative' id='sidenavXxEx4'>
+                    <span className='flex items-center text-sm py-4 px-6 h-12 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] transition duration-300 ease-in-out cursor-pointer' data-mdb-ripple='true' data-mdb-ripple-color='primary' data-bs-toggle='collapse' data-bs-target='#collapseSidenavXxEx4' aria-expanded='false' aria-controls='collapseSidenavXxEx4'>
+                      <span className='w-4 h-4 mr-3'><FaCartPlus /></span>
+                      <span>Orders</span>
                       <span className='w-4 h-4 ml-auto text-xl'><MdOutlineKeyboardArrowDown /></span>
                     </span>
-                    <ul className='relative accordion-collapse collapse' id='collapseSidenavXxEx6' aria-labelledby='sidenavXxEx6' data-bs-parent='#sidenavSecExample'>
+                    <ul className='relative accordion-collapse collapse' id='collapseSidenavXxEx4' aria-labelledby='sidenavXxEx4' data-bs-parent='#sidenavSecExample'>
                       <li className='relative'>
-                        <Link to='/app/reports' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Reports</Link>
+                        <Link to='/app/orders' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>All Orders</Link>
+                      </li>
+                      <li className='relative'>
+                        <Link to='/app/createorder' className='flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>Create Order</Link>
                       </li>
                     </ul>
+                  </li>
+                  <li className='relative'>
+                    <Link to='/app/payments' className='flex items-center text-sm py-4 px-6 h-12 overflow-hidden whitespace-nowrap text-[#7987a1] hover:text-[#6571ff] focus:text-[#6571ff] focus:border-l-2 focus:border-l-[#6571ff] transition duration-300 ease-in-out' data-mdb-ripple='true' data-mdb-ripple-color='primary'>
+                      <span className='w-4 h-4 mr-3'><FaMoneyCheck /></span>
+                      <span>Payments</span>
+                    </Link>
                   </li>
                 </ul>
               </div>
