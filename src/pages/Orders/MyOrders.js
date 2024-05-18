@@ -1,27 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../api/api';
 import { Link } from 'react-router-dom';
-import { MdOutlineBlock, MdEdit, MdDelete, } from 'react-icons/md';
+import { MdOutlineBlock } from 'react-icons/md';
 import Loader from '../Loader';
 import Pagination from '../Pagination';
-import { toast } from 'sonner'
 
-const Users = () => {
+const MyOrders = () => {
 
-  const [users,setUsers] = useState('')
+  // getting current user
+  const currentUser = window.localStorage.getItem('token');
+  const user = JSON.parse(currentUser).data;
+
+  const [orders,setOrders] = useState('')
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(20);
   const [total, setTotal] = useState(0);
-  const [searchUser, setSearchUser] = useState('');
+  const [searchOrder, setSearchOrder] = useState('');
 
-  
-  // Fetch All users
+  // Fetch All orders
   const getUsers = useCallback(async (offset, limit, search) => {
     try {
-      const response = await axios.get(`/api/users?offset=${offset}&limit=${limit}&search=${search}`);
-      setUsers(response.data.results);
+      const response = await axios.get(`/api/orders/${user.userId}?offset=${offset}&limit=${limit}&search=${search}`);
+      setOrders(response.data.results);
       setTotal(response.data.total);
       setLoading(false);
     } catch (error) {
@@ -29,11 +31,11 @@ const Users = () => {
       setError(error);
       setLoading(false);
     }
-  },[]);
+  },[user.userId]);
 
-  // Search user
+  // Search order
   const handleSearchChange = (e) => {
-    setSearchUser(e.target.value);
+    setSearchOrder(e.target.value);
     setCurrentPage(1);
   };
 
@@ -41,33 +43,17 @@ const Users = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       setLoading(true);
-      getUsers((currentPage - 1) * recordsPerPage, recordsPerPage, searchUser);
+      getUsers((currentPage - 1) * recordsPerPage, recordsPerPage, searchOrder);
     }, 500);
     return () => clearTimeout(timerId);
-  }, [currentPage, recordsPerPage, searchUser, getUsers]);
-
-
-  // delete a User
-  const deleteUser = async (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this User?');
-    if (confirmed) {
-      try {
-        await axios.delete(`/api/deleteuser/${id}`);
-        toast.success('User Deleted');
-        getUsers((currentPage - 1) * recordsPerPage, recordsPerPage, searchUser);
-      } catch (error) {
-        toast.error('Delete failed');
-        console.log(error);
-      }
-    }
-  };
+  }, [currentPage, recordsPerPage, searchOrder, getUsers]);
 
   return (
     <div className='mx-auto p-4'>
       <div className='bg-white rounded-lg p-4 lg:w-[78vw] xl:w-[81vw] 2xl:w-full'>
         <div className='flex flex-wrap items-center justify-between py-3'>
-          <Link to='/app/adduser' className='bg-[#6571ff] hover:bg-[#7c86f9] text-white px-5 py-2 rounded-lg'>Add User</Link>
-          <h5 className='text-[#6571ff]'>Showing {users.length} out of {total} users</h5>
+          <Link to='/app/createorder' className='bg-[#6571ff] hover:bg-[#7c86f9] text-white px-5 py-2 rounded-lg'>Make Order</Link>
+          <h5 className='text-[#6571ff]'>Showing {orders.length} out of {total} orders</h5>
           <div className='py-2'>
             <form>
               <label htmlFor='search'><span className='hidden'>Search</span>
@@ -76,8 +62,8 @@ const Users = () => {
                   id='search'
                   className='px-3 py-1.5 border bg-[#f2f9ff] border-slate-300 placeholder-slate-400 rounded-md focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] focus:ring-1'
                   required
-                  placeholder='Search user'
-                  value={searchUser}
+                  placeholder='Search order'
+                  value={searchOrder}
                   onChange={handleSearchChange}
                 />
               </label>
@@ -101,39 +87,32 @@ const Users = () => {
               )
             : (
               <div className='overflow-x-auto h-[73vh]'>
-                {users.length > 0
+                {orders.length > 0
                   ? (
                     <table className='w-full text-left table-auto'>
                       <thead>
                         <tr className='border-b border-slate-500'>
                           <th className='p-2'>ID</th>
-                          <th className='p-2'>First Name</th>
-                          <th className='p-2'>Last Names</th>
-                          <th className='p-2'>Email</th>
-                          <th className='p-2'>Phone Number</th>
-                          <th className='p-2'>Role</th>
-                          <th className='p-2'>Created At</th>
-                          <th className='p-2'>Updated At</th>
-                          <th className='p-2'>Action</th>
+                          <th className='p-2'>User Id</th>
+                          <th className='p-2'>Product Id</th>
+                          <th className='p-2'>Quantity</th>
+                          <th className='p-2'>Amount</th>
+                          <th className='p-2'>Status</th>
+                          <th className='p-2'>Payment Status</th>
+                          <th className='p-2'>Order Date</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {users.map((user) => (
-                          <tr key={user.userId}>
-                            <td className='p-2 '>{user.userId}</td>
-                            <td className='p-2 '>{user.firstName}</td>
-                            <td className='p-2'>{user.lastName}</td>
-                            <td className='p-2'>{user.email}</td>
-                            <td className='p-2'>{user.phoneNumber}</td>
-                            <td className='p-2'>{user.role}</td>
-                            <td className='p-2'>{new Date(user.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
-                            <td className='p-2'>{new Date(user.updatedAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
-                            <td className='p-2'>
-                              <div className='flex'>
-                                <span className='text-blue-600 text-xl'><Link to={`/app/updateuser/${user.userId}`}><MdEdit /></Link></span>
-                                  <button onClick={() => deleteUser(user.userId)} className='text-red-500 text-xl'><MdDelete /></button>
-                              </div>
-                            </td>
+                        {orders.map((order) => (
+                          <tr key={order.orderId}>
+                            <td className='p-2 '>{order.orderId}</td>
+                            <td className='p-2'>{order.userId}</td>
+                            <td className='p-2'>{order.productId}</td>
+                            <td className='p-2'>{order.quantity}</td>
+                            <td className='p-2'>{order.amount}</td>
+                            <td className='p-2'>{order.status}</td>
+                            <td className='p-2'>{order.paymentStatus}</td>
+                            <td className='p-2 '>{new Date(order.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -177,4 +156,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default MyOrders

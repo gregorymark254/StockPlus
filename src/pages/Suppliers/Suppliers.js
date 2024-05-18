@@ -95,7 +95,7 @@ const Suppliers = () => {
                           <th className='p-2'>Contact Number</th>
                           <th className='p-2'>Email Address</th>
                           <th className='p-2'>Address</th>
-                          <th className='p-2'>Action</th>
+                          <th className='p-2'>View Products</th>
                         </tr>
                       </thead>
                       <tbody>

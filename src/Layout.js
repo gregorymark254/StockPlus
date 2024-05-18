@@ -21,7 +21,7 @@ import Products from './pages/Products/Products'
 import CreateProduct from './pages/Products/CreateProduct'
 import Order from './pages/Orders/Orders'
 import CreateOrder from './pages/Orders/CreateOrder'
-import OrderDetails from './pages/Orders/OrderDetails'
+import MyOrders from './pages/Orders/MyOrders'
 import Payment from './pages/Payments/Payments'
 
 const Layout = () => {
@@ -66,10 +66,10 @@ const Layout = () => {
               <Route path='/createsupplier' element={<CreateSupplier />} />
               <Route path='/mysupplies/:id' element={<MySupplies />} />
               <Route path='/products' element={<Products />} />
-              <Route path='/createproduct' element={<CreateProduct />} />
+              <Route path='/createproduct/:id' element={<CreateProduct />} />
               <Route path='/orders' element={<Order />} />
               <Route path='/createorder' element={<CreateOrder />} />
-              <Route path='/orderdetails/:id' element={<OrderDetails />} />
+              <Route path='/myorders' element={<MyOrders />} />
               <Route path='/payments' element={<Payment />} />
               <Route path='/unauthorised' element={<Unauthorised />} />
               <Route path='*' element={<Missing />} />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../api/api';
-import { Link } from 'react-router-dom';
 import { MdOutlineBlock } from 'react-icons/md';
 import Loader from '../Loader';
 import Pagination from '../Pagination';
@@ -48,7 +47,6 @@ const Products = () => {
     <div className='mx-auto p-4'>
       <div className='bg-white rounded-lg p-4 lg:w-[78vw] xl:w-[81vw] 2xl:w-full'>
         <div className='flex flex-wrap items-center justify-between py-3'>
-          <Link to='/app/createproduct' className='bg-[#6571ff] hover:bg-[#7c86f9] text-white px-5 py-2 rounded-lg'>Add Product</Link>
           <h5 className='text-[#6571ff]'>Showing {products.length} out of {total} products</h5>
           <div className='py-2'>
             <form>
