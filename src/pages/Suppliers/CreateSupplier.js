@@ -26,6 +26,7 @@ const CreateSupplier = () => {
       toast.error('Failed to add supplier')
     }
   }
+  
   return (
     <div className='mx-auto p-4 flex justify-center'>
       <div className='p-4 bg-white rounded-lg w-full lg:w-full xl:w-1/2'>

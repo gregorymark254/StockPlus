@@ -93,6 +93,8 @@ const Products = () => {
                           <th className='p-2'>Product Description</th>
                           <th className='p-2'>Price</th>
                           <th className='p-2'>Stock Level</th>
+                          <th className='p-2'>Supplier Id</th>
+                          <th className='p-2'>Category Id</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -103,6 +105,8 @@ const Products = () => {
                             <td className='p-2'>{product.productDescription}</td>
                             <td className='p-2'>{product.productPrice}</td>
                             <td className='p-2'>{product.stocklevel}</td>
+                            <td className='p-2'>{product.supplierId}</td>
+                            <td className='p-2'>{product.categoryId}</td>
                           </tr>
                         ))}
                       </tbody>

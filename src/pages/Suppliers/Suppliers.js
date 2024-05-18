@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import axios from '../../api/api';
 import { Link } from 'react-router-dom';
 import { MdOutlineBlock } from 'react-icons/md';
+import { FaEye } from "react-icons/fa";
 import Loader from '../Loader';
 import Pagination from '../Pagination';
 
@@ -94,6 +95,7 @@ const Suppliers = () => {
                           <th className='p-2'>Contact Number</th>
                           <th className='p-2'>Email Address</th>
                           <th className='p-2'>Address</th>
+                          <th className='p-2'>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,6 +107,9 @@ const Suppliers = () => {
                             <td className='p-2'>{supplier.contactNumber}</td>
                             <td className='p-2'>{supplier.email}</td>
                             <td className='p-2'>{supplier.Address}</td>
+                            <td className='p-2'>
+                              <Link to={`/app/mysupplies/${supplier.supplierId}`}><span className='text-xl text-blue-600 hover:text-blue-500'><FaEye /></span></Link>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
