@@ -93,8 +93,9 @@ const MyOrders = () => {
                       <thead>
                         <tr className='border-b border-slate-500'>
                           <th className='p-2'>ID</th>
-                          <th className='p-2'>User Id</th>
-                          <th className='p-2'>Product Id</th>
+                          <th className='p-2'>First Name</th>
+                          <th className='p-2'>User Email</th>
+                          <th className='p-2'>Product Name</th>
                           <th className='p-2'>Quantity</th>
                           <th className='p-2'>Amount</th>
                           <th className='p-2'>Status</th>
@@ -106,12 +107,25 @@ const MyOrders = () => {
                         {orders.map((order) => (
                           <tr key={order.orderId}>
                             <td className='p-2 '>{order.orderId}</td>
-                            <td className='p-2'>{order.userId}</td>
-                            <td className='p-2'>{order.productId}</td>
+                            <td className='p-2'>{order.firstName}</td>
+                            <td className='p-2'>{order.email}</td>
+                            <td className='p-2'>{order.productName}</td>
                             <td className='p-2'>{order.quantity}</td>
                             <td className='p-2'>{order.amount}</td>
-                            <td className='p-2'>{order.status}</td>
-                            <td className='p-2'>{order.paymentStatus}</td>
+                            <td className='p-2'>
+                              {order.status === 'pending' ? (
+                                <span className='px-3 py-1 bg-blue-100 text-blue-600 rounded-full font-bold'>Pending</span>
+                              ) : (
+                                <span className='px-3 py-1 bg-green-100 text-green-600 rounded-full font-bold'>Paid</span>
+                              )}
+                            </td>
+                            <td className='p-2'>
+                              {order.paymentStatus === 'pending' ? (
+                                <span className='px-3 py-1 bg-blue-100 text-blue-600 rounded-full font-bold'>Pending</span>
+                              ) : (
+                                <span className='px-3 py-1 bg-green-100 text-green-600 rounded-full font-bold'>Paid</span>
+                              )}
+                            </td>
                             <td className='p-2 '>{new Date(order.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
                           </tr>
                         ))}

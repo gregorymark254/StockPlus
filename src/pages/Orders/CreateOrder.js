@@ -11,7 +11,8 @@ const CreateOrder = () => {
   const [userId, setUserId] = useState(user.userId);
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [amount, setAmount] = useState('');
+  const [price, setPrice] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const navigate = useNavigate()
   const [products,setProducts] = useState([])
 
@@ -29,15 +30,35 @@ const CreateOrder = () => {
     getProducts();
   }, [getProducts]);
 
+  const handleProductChange = (e) => {
+    const selectedProductId = e.target.value;
+    setProductId(selectedProductId);
+    const selectedProduct = products.find(product => product.productId === parseInt(selectedProductId))
+    if (selectedProduct) {
+      setProductId(selectedProductId);
+      setPrice(selectedProduct.productPrice);
+    }
+  }
+
   // submit data
   const handleSubmit = async(e) => {
     e.preventDefault();
+    const amount = quantity * price
     try {
-      await axios.post('/api/orders',
+      const response = await axios.post('/api/orders',
         {  userId, productId, quantity, amount }
       )
       toast.success('Order made sucessfully')
-      navigate('/app/myorders')
+      if (paymentMethod === 'Cash on delivery') {
+        navigate('/app/myorders')
+      } else {
+        const orderId  = response.data.orderId
+        console.log(orderId)
+        await axios.post('/api/payment',
+          { orderId, paymentMethod, amount }
+        )
+        navigate('/app/myorders')
+      }
     } catch (error) {
       console.log(error)
       toast.error('Failed to add order')
@@ -67,7 +88,7 @@ const CreateOrder = () => {
                 name='org' id='org'
                 className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                 value={productId}
-                onChange={(e) => setProductId(e.target.value)}
+                onChange={handleProductChange}
               >
                 <option value=''>Select Product</option>
                 {products.map(product => (
@@ -93,12 +114,32 @@ const CreateOrder = () => {
               <input
                 type='number'
                 required
+                disabled
                 placeholder='Amount'
                 className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </label>
+          </div>
+          <div className='my-2'>
+            <label htmlFor="payment"><span>Payment Method</span>
+              <select 
+                name="" id=""
+                required
+                className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <option value="">Select Payment Method</option>
+                <option value="Cash on delivery">Cash on delivery</option>
+                <option value="Mpesa">Mpesa</option>
+                <option value="Paystack">Paystack</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            Total Amount : KSH {quantity * price}
           </div>
           <div className='py-3'>
             <button type='submit' className='bg-[#6571ff] text-white px-5 py-1 w-full hover:bg-[#7c86f9]'>Create Order</button>

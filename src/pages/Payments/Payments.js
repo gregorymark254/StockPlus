@@ -88,7 +88,8 @@ const Payments = () => {
                         <tr className='border-b border-slate-500'>
                           <th className='p-2'>ID</th>
                           <th className='p-2'>Amount</th>
-                          <th className='p-2'>Paymment Method</th>
+                          <th className='p-2'>Payment Method</th>
+                          <th className='p-2'>Payment Number</th>
                           <th className='p-2'>Payment Date</th>
                           <th className='p-2'>Order Id</th>
                         </tr>
@@ -99,6 +100,7 @@ const Payments = () => {
                             <td className='p-2 '>{payment.paymentId}</td>
                             <td className='p-2'>{payment.amount}</td>
                             <td className='p-2'>{payment.paymentMethod}</td>
+                            <td className='p-2'>{payment.phoneNUmber}</td>
                             <td className='p-2 '>{new Date(payment.paymentDate).toISOString().replace('T', ' ').slice(0, 19)}</td>
                             <td className='p-2'>{payment.orderId}</td>
                           </tr>

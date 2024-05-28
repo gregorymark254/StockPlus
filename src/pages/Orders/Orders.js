@@ -82,33 +82,51 @@ const Orders = () => {
               </div>
               )
             : (
-              <div className='overflow-x-auto h-[73vh]'>
+              <div className='overflow-x-auto'>
                 {orders.length > 0
                   ? (
                     <table className='w-full text-left table-auto'>
                       <thead>
                         <tr className='border-b border-slate-500'>
                           <th className='p-2'>ID</th>
-                          <th className='p-2'>User Id</th>
-                          <th className='p-2'>Product Id</th>
+                          <th className='p-2'>First Name</th>
+                          <th className='p-2'>User Email</th>
+                          <th className='p-2'>Product Name</th>
                           <th className='p-2'>Quantity</th>
                           <th className='p-2'>Amount</th>
-                          <th className='p-2'>Status</th>
+                          <th className='p-2'>Delivery</th>
                           <th className='p-2'>Payment Status</th>
                           <th className='p-2'>Order Date</th>
+                          <th className='p-2'>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {orders.map((order) => (
                           <tr key={order.orderId}>
                             <td className='p-2 '>{order.orderId}</td>
-                            <td className='p-2'>{order.userId}</td>
-                            <td className='p-2'>{order.productId}</td>
+                            <td className='p-2'>{order.firstName}</td>
+                            <td className='p-2'>{order.email}</td>
+                            <td className='p-2'>{order.productName}</td>
                             <td className='p-2'>{order.quantity}</td>
                             <td className='p-2'>{order.amount}</td>
-                            <td className='p-2'>{order.status}</td>
-                            <td className='p-2'>{order.paymentStatus}</td>
-                            <td className='p-2 '>{new Date(order.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
+                            <td className='p-2'>
+                              {order.status === 'pending' ? (
+                                <span className='px-3 py-1 bg-blue-100 text-blue-600 rounded-full font-bold'>Pending</span>
+                              ) : (
+                                <span className='px-3 py-1 bg-green-100 text-green-600 rounded-full font-bold'>Paid</span>
+                              )}
+                            </td>
+                            <td className='p-2'>
+                              {order.paymentStatus === 'pending' ? (
+                                <span className='px-3 py-1 bg-blue-100 text-blue-600 rounded-full font-bold'>Pending</span>
+                              ) : (
+                                <span className='px-3 py-1 bg-green-100 text-green-600 rounded-full font-bold'>Paid</span>
+                              )}
+                            </td>
+                            <td className='p-2'>{new Date(order.createdAt).toISOString().replace('T', ' ').slice(0, 19)}</td>
+                            <td className='p-2 '>
+                              <button className='px-5 py-0.5 rounded-full border border-[#6571ff] text-[#6571ff] font-bold hover:bg-[#6571ff] hover:text-white'>Delivered</button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
