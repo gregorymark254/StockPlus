@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
 
-  const [msisdn, setMsisdn] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
-  const [pin, setPin] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (pin !== confirmPin) {
+    if (password !== confirmPin) {
       toast.error('Passwords do not match');
       return;
     }
     try {
-      await axios.post('/reset_password',
-        { msisdn, otp, pin }
+      await axios.post('/api/resetpassword',
+        { phoneNumber, otp, password }
       );
       toast.success('Password reset sucessful');
       navigate('/login');
@@ -49,8 +49,8 @@ const ForgotPassword = () => {
                   required
                   placeholder='0700000000'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
-                  value={msisdn}
-                  onChange={(e) => setMsisdn(e.target.value)}
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </label>
             </div>
@@ -73,8 +73,8 @@ const ForgotPassword = () => {
                   required
                   placeholder='New Password'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
-                  value={pin}
-                  onChange={(e) => setPin(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
             </div>
