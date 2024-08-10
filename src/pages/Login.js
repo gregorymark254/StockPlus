@@ -47,6 +47,7 @@ const Login = ({ setAccessToken }) => {
                 <input
                   type='text'
                   required
+                  id='email'
                   placeholder='user@example.com'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                   value={email}
@@ -59,6 +60,7 @@ const Login = ({ setAccessToken }) => {
                 <input
                   type='password'
                   required
+                  id='password'
                   placeholder='********'
                   className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                   value={password}
@@ -67,11 +69,11 @@ const Login = ({ setAccessToken }) => {
               </label>
             </div>
             <div className='my-3'>
-              <button disabled={loading} className='bg-[#6571ff] text-white px-5 py-2 rounded-lg text-md w-full hover:bg-[#525cce]'>{loading ? 'Please Wait...' : 'Login'}</button>
+              <button type="submit" disabled={loading} className='bg-[#6571ff] text-white px-5 py-2 rounded-lg text-md w-full hover:bg-[#525cce]'>{loading ? 'Please Wait...' : 'Login'}</button>
             </div>
           </form>
           <div className="flex items-center justify-between">
-            <span>Don't have an account? <u className='text-[#6571ff] hover:text-blue-700'><Link to='/register'>Register</Link></u></span>
+            <span>Dont have an account? <u className='text-[#6571ff] hover:text-blue-700'><Link to='/register'>Register</Link></u></span>
             <Link to='/forgot-password' className='text-[#6571ff] hover:underline'>Forgot Password?</Link>
           </div>
           <div className='mt-4'>
