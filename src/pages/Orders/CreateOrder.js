@@ -9,6 +9,7 @@ const CreateOrder = () => {
   const user = JSON.parse(currentUser).data;
   
   const [userId, setUserId] = useState(user.userId);
+  const [phone, setPhone] = useState('');
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
@@ -48,16 +49,18 @@ const CreateOrder = () => {
       const response = await axios.post('/api/orders',
         {  userId, productId, quantity, amount }
       )
-      toast.success('Order made sucessfully')
+      const orderId  = response.data.orderId
       if (paymentMethod === 'Cash on delivery') {
+        toast.success('Order made successfully');
         navigate('/app/myorders')
-      } else {
-        const orderId  = response.data.orderId
-        console.log(orderId)
-        await axios.post('/api/payment',
-          { orderId, paymentMethod, amount }
-        )
-        navigate('/app/myorders')
+      } else if(paymentMethod === 'Mpesa')  {
+        await axios.post('/api/stk', {
+          phone,
+          amount,
+          orderId
+        });
+      // Assuming the save transaction response indicates success
+      toast.success('STK Push initiated successfully');
       }
     } catch (error) {
       console.log(error)
@@ -119,6 +122,18 @@ const CreateOrder = () => {
                 className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className='my-2'>
+            <label htmlFor='number'><span>Phone Number</span>
+              <input
+                type='number'
+                required
+                placeholder='Phone Number'
+                className='px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#6571ff] focus:ring-[#6571ff] block w-full rounded-md sm:text-sm focus:ring-1'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </label>
           </div>
